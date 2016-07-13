@@ -3,3 +3,21 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.ng-hide {
+    display: none !important;
+}
+
+body {
+    text-align: center;
+}
+
+.main {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main button {
+    margin-top: 8px;
+}

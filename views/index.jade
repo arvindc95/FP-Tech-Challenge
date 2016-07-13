@@ -1,20 +1,60 @@
 doctype 5
 html.
-	<head>
-		<meta charset="utf8">
-		<base href="/">
-		<title>Fresh Prints Tech Challenge</title>
-		<link rel="stylesheet" href="/css/app.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	</head>
-	<body>
-		<div ng-controller="AppCtrl" ng-cloak></div>
-			<!-- INSERT HTML CODE HERE -->
-			<h2> FRESH PRINTS TECH CHALLENGE </h2>
-		<script src="js/lib/angular/angular.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/services.js"></script>
-		<script src="js/controllers.js"></script>
-		<script src="js/filters.js"></script>
-		<script src="js/directives.js"></script>
-	</body>
+    <head>
+        <meta charset="utf8">
+        <base href="/">
+        <title>Fresh Prints Tech Challenge</title>
+        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- INSERT HTML CODE HERE -->
+        <h2> FRESH PRINTS TECH CHALLENGE </h2>
+
+        <div class="form-group main" ng-app="myApp.controllers" ng-controller="AppCtrl" ng-init="init()">
+            <select class="form-control" ng-model="chosenStyleCode" ng-change="getApparelData()" ng-hide="apparelData" required>
+                <option value="">
+                    --Select Apparel--
+                </option>
+                <option ng-repeat="option in styleCodeList" value="{{ option }}">
+                    {{ option.style_code }}
+                </option>
+            </select>
+            <div ng-hide="!apparelData" class="form-group">
+                <p>
+                    {{ apparelData.styleCode }}
+                </p>
+                <select class="form-control" ng-model="chosenColorCode" required>
+                    <option value="">
+                        --Select Color--
+                    </option>
+                    <option ng-repeat="option in apparelData.colorCodes" value="{{ option.code }}">
+                        {{ option.name }}
+                    </option>
+                </select>
+                <select class="form-control" ng-model="chosenSizeCode" required>
+                    <option value="">
+                        --Select Size--
+                    </option>
+                    <option ng-repeat="option in apparelData.sizeCodes" value="{{ option.code }}">
+                        {{ option.value }}
+                    </option>
+                </select>
+                <input class="form-control" type="number" name="quantity" label="Enter Quantity:" ng-model="chosenQuantity" placeholder="Enter Quantity" required>
+                <button class="btn btn-default" ng-click="getQuote()">
+                  Submit
+                </button>
+            </div>
+            <p ng-hide="!price">
+                Total order price: {{ price }} <br>
+                Price per unit: {{ pricePerUnit }}
+            </p>
+        </div>
+
+        <script src="js/lib/angular/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+    </body>
